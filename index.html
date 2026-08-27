@@ -1,18 +1,168 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Avatar Closet</title>
+    <title>Avatar Closet</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f7f3ef;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+        }
+
+        .closet {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            align-items: flex-start;
+        }
+
+        .avatar-area {
+            width: 450px;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 400px;
+            margin: auto;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            display: block;
+        }
+
+        .clothing-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .closet-menu {
+            width: 250px;
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        .closet-menu h2 {
+            margin-top: 0;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 12px;
+            background: #eeeeee;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #dddddd;
+        }
+
+        .test-shirt {
+            position: absolute;
+            top: 35%;
+            left: 25%;
+            width: 50%;
+            height: 25%;
+            background: pink;
+            border-radius: 30px;
+            display: none;
+        }
+
+        .test-shirt.blue {
+            background: lightblue;
+        }
+
+        .test-shirt.purple {
+            background: plum;
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>My Avatar Closet</h1>
+    <h1>My Avatar Closet 👗</h1>
 
-    <img 
-        src="https://i.postimg.cc/cLQhZ2rv/IMG-3117.png"
-        alt="My Avatar"
-        width="400"
-    >
+    <div class="closet">
+
+        <!-- AVATAR -->
+        <div class="avatar-area">
+
+            <div class="avatar-container">
+
+                <img
+                    src="https://i.postimg.cc/cLQhZ2rv/IMG-3117.png"
+                    alt="My Avatar"
+                >
+
+                <!-- Test clothing -->
+                <div id="shirt" class="test-shirt"></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- CLOSET MENU -->
+        <div class="closet-menu">
+
+            <h2>Tops</h2>
+
+            <button onclick="changeShirt('pink')">
+                Pink Top
+            </button>
+
+            <button onclick="changeShirt('blue')">
+                Blue Top
+            </button>
+
+            <button onclick="changeShirt('purple')">
+                Purple Top
+            </button>
+
+            <button onclick="removeShirt()">
+                Remove Top
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        function changeShirt(colour) {
+
+            const shirt = document.getElementById("shirt");
+
+            shirt.style.display = "block";
+
+            shirt.className = "test-shirt " + colour;
+        }
+
+        function removeShirt() {
+
+            const shirt = document.getElementById("shirt");
+
+            shirt.style.display = "none";
+        }
+
+    </script>
 
 </body>
 </html>
