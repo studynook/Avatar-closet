@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <title>Avatar Closet</title>
 
     <style>
+
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -23,6 +25,8 @@
             align-items: flex-start;
         }
 
+        /* Avatar area */
+
         .avatar-area {
             width: 450px;
         }
@@ -33,18 +37,27 @@
             margin: auto;
         }
 
-        .avatar-container img {
-            width: 100%;
-            display: block;
-        }
+        /* Every clothing layer uses the exact same position */
 
-        .clothing-layer {
+        .avatar-layer {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
+            height: 100%;
+            object-fit: contain;
             pointer-events: none;
         }
+
+        /* Base avatar */
+
+        .avatar-base {
+            position: relative;
+            width: 100%;
+            display: block;
+        }
+
+        /* Closet */
 
         .closet-menu {
             width: 250px;
@@ -73,69 +86,76 @@
             background: #dddddd;
         }
 
-        .test-shirt {
-            position: absolute;
-            top: 35%;
-            left: 25%;
-            width: 50%;
-            height: 25%;
-            background: pink;
-            border-radius: 30px;
-            display: none;
-        }
-
-        .test-shirt.blue {
-            background: lightblue;
-        }
-
-        .test-shirt.purple {
-            background: plum;
-        }
     </style>
+
 </head>
+
 
 <body>
 
     <h1>My Avatar Closet 👗</h1>
 
+
     <div class="closet">
 
+
         <!-- AVATAR -->
+
         <div class="avatar-area">
 
             <div class="avatar-container">
 
+                <!-- BODY -->
+
                 <img
+                    class="avatar-base"
                     src="https://i.postimg.cc/ZnFsYRbG/IMG-3250.png"
-                    alt="My Avatar"
+                    alt="Avatar"
                 >
 
-                <!-- Test clothing -->
-                <div id="shirt" class="test-shirt"></div>
+
+                <!-- CLOTHING LAYERS -->
+
+                <img
+                    id="bottom-layer"
+                    class="avatar-layer"
+                    style="display: none;"
+                >
+
+                <img
+                    id="top-layer"
+                    class="avatar-layer"
+                    style="display: none;"
+                >
+
+                <img
+                    id="hair-layer"
+                    class="avatar-layer"
+                    style="display: none;"
+                >
+
+                <img
+                    id="accessory-layer"
+                    class="avatar-layer"
+                    style="display: none;"
+                >
 
             </div>
 
         </div>
 
 
-        <!-- CLOSET MENU -->
+        <!-- CLOSET -->
+
         <div class="closet-menu">
 
-            <h2>Tops</h2>
+            <h2>Test Closet</h2>
 
-            <button onclick="changeShirt('pink')">
-                Pink Top
+            <button onclick="testTop()">
+                Test Top
             </button>
 
-            <button onclick="changeShirt('blue')">
-                Blue Top
-            </button>
-
-            <button onclick="changeShirt('purple')">
-                Purple Top
-            </button>
-
-            <button onclick="removeShirt()">
+            <button onclick="removeTop()">
                 Remove Top
             </button>
 
@@ -146,23 +166,36 @@
 
     <script>
 
-        function changeShirt(colour) {
+        /*
+        This is our clothing system.
 
-            const shirt = document.getElementById("shirt");
+        Later, the image source here can be
+        replaced with an AI-generated clothing image.
+        */
 
-            shirt.style.display = "block";
 
-            shirt.className = "test-shirt " + colour;
+        function testTop() {
+
+            const top = document.getElementById("top-layer");
+
+            top.src = "https://dummyimage.com/400x400/ffb6c1/ffffff&text=TEST+TOP";
+
+            top.style.display = "block";
+
         }
 
-        function removeShirt() {
 
-            const shirt = document.getElementById("shirt");
+        function removeTop() {
 
-            shirt.style.display = "none";
+            const top = document.getElementById("top-layer");
+
+            top.style.display = "none";
+
         }
 
     </script>
 
+
 </body>
+
 </html>
