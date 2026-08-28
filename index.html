@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 
@@ -14,7 +15,7 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #faf4ed;
+            background: #f7f3ef;
             color: #333;
         }
 
@@ -35,7 +36,7 @@
 
         /* =========================
            MAIN LAYOUT
-        ========================= */
+        ========================== */
 
         .closet {
             display: flex;
@@ -48,7 +49,7 @@
 
         /* =========================
            AVATAR
-        ========================= */
+        ========================== */
 
         .avatar-area {
             width: 450px;
@@ -65,8 +66,11 @@
             width: 100%;
             display: block;
             position: relative;
-            z-index: 1;
+            z-index: 0;
         }
+
+
+        /* ALL CLOTHING GOES ABOVE THE BODY */
 
         .avatar-layer {
             position: absolute;
@@ -97,7 +101,7 @@
 
         /* =========================
            CLOSET PANEL
-        ========================= */
+        ========================== */
 
         .closet-panel {
             width: 360px;
@@ -110,7 +114,7 @@
 
         /* =========================
            CATEGORY BUTTONS
-        ========================= */
+        ========================== */
 
         .categories {
             display: grid;
@@ -128,6 +132,10 @@
             font-size: 15px;
         }
 
+        .category-button:hover {
+            background: #dddddd;
+        }
+
         .category-button.active {
             background: #333;
             color: white;
@@ -135,8 +143,8 @@
 
 
         /* =========================
-           ITEMS
-        ========================= */
+           CLOTHING ITEMS
+        ========================== */
 
         .items {
             display: grid;
@@ -157,10 +165,6 @@
             border-color: #aaa;
         }
 
-        .item.selected {
-            border-color: #333;
-        }
-
         .item-icon {
             font-size: 30px;
             margin-bottom: 5px;
@@ -173,7 +177,7 @@
 
         /* =========================
            REMOVE BUTTON
-        ========================= */
+        ========================== */
 
         .remove-button {
             width: 100%;
@@ -183,20 +187,28 @@
             border-radius: 12px;
             background: #eeeeee;
             cursor: pointer;
+            font-size: 14px;
+        }
+
+        .remove-button:hover {
+            background: #dddddd;
         }
 
 
         /* =========================
            TEST CLOTHING
-        ========================= */
+        ========================== */
 
         .test-clothing {
             position: absolute;
             display: none;
+            z-index: 2;
         }
 
 
-        /* TOPS */
+        /* =========================
+           TEST TOPS
+        ========================== */
 
         .pink-top {
             top: 38%;
@@ -226,7 +238,9 @@
         }
 
 
-        /* BOTTOMS */
+        /* =========================
+           TEST BOTTOMS
+        ========================== */
 
         .jeans {
             top: 57%;
@@ -247,7 +261,9 @@
         }
 
 
-        /* MOBILE */
+        /* =========================
+           MOBILE / IPAD
+        ========================== */
 
         @media (max-width: 800px) {
 
@@ -301,7 +317,7 @@
         <div class="avatar-container">
 
 
-            <!-- BASE -->
+            <!-- BASE AVATAR -->
 
             <img
                 class="avatar-base"
@@ -310,7 +326,12 @@
             >
 
 
-            <!-- TOP LAYER -->
+            <!-- =========================
+                 TEST CLOTHING
+            ========================== -->
+
+
+            <!-- TOPS -->
 
             <div
                 id="pink-top"
@@ -328,7 +349,7 @@
             </div>
 
 
-            <!-- BOTTOM LAYER -->
+            <!-- BOTTOMS -->
 
             <div
                 id="jeans"
@@ -348,14 +369,15 @@
 
 
     <!-- =========================
-         CLOSET
+         CLOSET PANEL
     ========================== -->
 
     <div class="closet-panel">
 
 
-        <div class="categories">
+        <!-- CATEGORIES -->
 
+        <div class="categories">
 
             <button
                 class="category-button active"
@@ -374,13 +396,20 @@
 
             </button>
 
-
         </div>
 
 
 
-        <div id="items" class="items"></div>
+        <!-- ITEMS -->
 
+        <div
+            id="items"
+            class="items">
+        </div>
+
+
+
+        <!-- REMOVE -->
 
         <button
             class="remove-button"
@@ -545,8 +574,8 @@ function equipItem(category, item) {
 
 
     /*
-       First remove the currently
-       equipped item from THIS category.
+       Remove other items from
+       the SAME category only.
     */
 
     clothing[category].forEach(function(clothingItem) {
@@ -559,20 +588,19 @@ function equipItem(category, item) {
 
 
     /*
-       Then show the selected item.
+       Show selected item.
     */
 
     document
         .getElementById(item.id)
         .style.display = "block";
 
-
 }
 
 
 
 /* =========================
-   REMOVE CURRENT ITEM
+   REMOVE CURRENT CATEGORY
 ========================= */
 
 function removeCurrentItem() {
@@ -603,3 +631,4 @@ displayItems("tops");
 </body>
 
 </html>
+```
