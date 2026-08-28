@@ -1,34 +1,57 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-    <title>Avatar Closet</title>
+    <title>My Avatar Closet</title>
 
     <style>
 
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: #f7f3ef;
-            margin: 0;
-            padding: 30px;
+        * {
+            box-sizing: border-box;
         }
 
-        h1 {
-            margin-bottom: 25px;
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f7f3ef;
+            color: #333;
         }
+
+        /* HEADER */
+
+        header {
+            text-align: center;
+            padding: 30px 20px 15px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        header p {
+            margin-top: 8px;
+            color: #777;
+        }
+
+
+        /* MAIN LAYOUT */
 
         .closet {
             display: flex;
             justify-content: center;
-            gap: 50px;
             align-items: flex-start;
+            gap: 50px;
+            padding: 20px;
         }
 
-        /* Avatar area */
+
+        /* AVATAR */
 
         .avatar-area {
             width: 450px;
+            text-align: center;
         }
 
         .avatar-container {
@@ -37,7 +60,11 @@
             margin: auto;
         }
 
-        /* Every clothing layer uses the exact same position */
+        .avatar-base {
+            position: relative;
+            width: 100%;
+            display: block;
+        }
 
         .avatar-layer {
             position: absolute;
@@ -49,41 +76,116 @@
             pointer-events: none;
         }
 
-        /* Base avatar */
 
-        .avatar-base {
-            position: relative;
-            width: 100%;
-            display: block;
-        }
+        /* CLOSET PANEL */
 
-        /* Closet */
-
-        .closet-menu {
-            width: 250px;
+        .closet-panel {
+            width: 360px;
             background: white;
-            padding: 20px;
-            border-radius: 20px;
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
         }
 
-        .closet-menu h2 {
-            margin-top: 0;
+
+        /* CATEGORY BUTTONS */
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
-        button {
-            display: block;
-            width: 100%;
+        .category-button {
+            border: none;
             padding: 12px;
-            margin: 10px 0;
+            border-radius: 12px;
+            background: #eeeeee;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .category-button:hover {
+            background: #dddddd;
+        }
+
+        .category-button.active {
+            background: #333;
+            color: white;
+        }
+
+
+        /* CLOTHING GRID */
+
+        .items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .item {
+            border: 2px solid #eeeeee;
+            border-radius: 15px;
+            padding: 15px 5px;
+            background: white;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .item:hover {
+            border-color: #aaa;
+        }
+
+        .item-icon {
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+
+        .item-name {
+            font-size: 12px;
+        }
+
+
+        /* REMOVE BUTTON */
+
+        .remove-button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
             border: none;
             border-radius: 12px;
             background: #eeeeee;
             cursor: pointer;
-            font-size: 16px;
         }
 
-        button:hover {
+        .remove-button:hover {
             background: #dddddd;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .closet {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .avatar-area {
+                width: 100%;
+            }
+
+            .avatar-container {
+                width: 320px;
+            }
+
+            .closet-panel {
+                width: 100%;
+                max-width: 360px;
+            }
+
         }
 
     </style>
@@ -93,107 +195,364 @@
 
 <body>
 
+
+<header>
+
     <h1>My Avatar Closet 👗</h1>
 
+    <p>Choose your outfit</p>
 
-    <div class="closet">
-
-
-        <!-- AVATAR -->
-
-        <div class="avatar-area">
-
-            <div class="avatar-container">
-
-                <!-- BODY -->
-
-                <img
-                    class="avatar-base"
-                    src="https://i.postimg.cc/ZnFsYRbG/IMG-3250.png"
-                    alt="Avatar"
-                >
+</header>
 
 
-                <!-- CLOTHING LAYERS -->
 
-                <img
-                    id="bottom-layer"
-                    class="avatar-layer"
-                    style="display: none;"
-                >
-
-                <img
-                    id="top-layer"
-                    class="avatar-layer"
-                    style="display: none;"
-                >
-
-                <img
-                    id="hair-layer"
-                    class="avatar-layer"
-                    style="display: none;"
-                >
-
-                <img
-                    id="accessory-layer"
-                    class="avatar-layer"
-                    style="display: none;"
-                >
-
-            </div>
-
-        </div>
+<div class="closet">
 
 
-        <!-- CLOSET -->
+    <!-- AVATAR -->
 
-        <div class="closet-menu">
+    <div class="avatar-area">
 
-            <h2>Test Closet</h2>
+        <div class="avatar-container">
 
-            <button onclick="testTop()">
-                Test Top
-            </button>
+            <!-- BASE AVATAR -->
 
-            <button onclick="removeTop()">
-                Remove Top
-            </button>
+            <img
+                class="avatar-base"
+                src="https://i.postimg.cc/ZnFsYRbG/IMG-3250.png"
+                alt="Avatar"
+            >
+
+
+            <!-- CLOTHING LAYERS -->
+
+            <img
+                id="bottom-layer"
+                class="avatar-layer"
+                style="display:none;"
+            >
+
+            <img
+                id="top-layer"
+                class="avatar-layer"
+                style="display:none;"
+            >
+
+            <img
+                id="hair-layer"
+                class="avatar-layer"
+                style="display:none;"
+            >
+
+            <img
+                id="accessory-layer"
+                class="avatar-layer"
+                style="display:none;"
+            >
 
         </div>
 
     </div>
 
 
-    <script>
 
-        /*
-        This is our clothing system.
+    <!-- CLOSET -->
 
-        Later, the image source here can be
-        replaced with an AI-generated clothing image.
-        */
+    <div class="closet-panel">
 
 
-        function testTop() {
+        <!-- CATEGORIES -->
 
-            const top = document.getElementById("top-layer");
+        <div class="categories">
 
-            top.src = "https://dummyimage.com/400x400/ffb6c1/ffffff&text=TEST+TOP";
+            <button
+                class="category-button active"
+                onclick="showCategory('tops', this)">
+                Tops
+            </button>
 
-            top.style.display = "block";
+            <button
+                class="category-button"
+                onclick="showCategory('bottoms', this)">
+                Bottoms
+            </button>
 
+            <button
+                class="category-button"
+                onclick="showCategory('hair', this)">
+                Hair
+            </button>
+
+            <button
+                class="category-button"
+                onclick="showCategory('accessories', this)">
+                Extras
+            </button>
+
+        </div>
+
+
+
+        <!-- ITEMS -->
+
+        <div id="items" class="items"></div>
+
+
+
+        <!-- REMOVE -->
+
+        <button
+            class="remove-button"
+            onclick="removeCurrentItem()">
+
+            Remove Current Item
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* --------------------------------
+   CLOTHING DATA
+-------------------------------- */
+
+
+const clothing = {
+
+    tops: [
+
+        {
+            name: "Pink Top",
+            icon: "👕",
+            image: ""
+        },
+
+        {
+            name: "Blue Top",
+            icon: "👚",
+            image: ""
+        },
+
+        {
+            name: "Purple Top",
+            icon: "🧥",
+            image: ""
         }
 
+    ],
 
-        function removeTop() {
 
-            const top = document.getElementById("top-layer");
+    bottoms: [
 
-            top.style.display = "none";
+        {
+            name: "Jeans",
+            icon: "👖",
+            image: ""
+        },
 
+        {
+            name: "Skirt",
+            icon: "👗",
+            image: ""
         }
 
-    </script>
+    ],
+
+
+    hair: [
+
+        {
+            name: "Hair Style 1",
+            icon: "💇",
+            image: ""
+        },
+
+        {
+            name: "Hair Style 2",
+            icon: "💇",
+            image: ""
+        }
+
+    ],
+
+
+    accessories: [
+
+        {
+            name: "Bag",
+            icon: "👜",
+            image: ""
+        },
+
+        {
+            name: "Hat",
+            icon: "🎩",
+            image: ""
+        }
+
+    ]
+
+};
+
+
+
+/* --------------------------------
+   SHOW CATEGORY
+-------------------------------- */
+
+
+let currentCategory = "tops";
+
+
+function showCategory(category, button) {
+
+    currentCategory = category;
+
+
+    /* Remove active state */
+
+    document
+        .querySelectorAll(".category-button")
+        .forEach(function(btn) {
+
+            btn.classList.remove("active");
+
+        });
+
+
+    /* Add active state */
+
+    button.classList.add("active");
+
+
+    displayItems(category);
+
+}
+
+
+
+/* --------------------------------
+   DISPLAY ITEMS
+-------------------------------- */
+
+
+function displayItems(category) {
+
+    const container = document.getElementById("items");
+
+    container.innerHTML = "";
+
+
+    clothing[category].forEach(function(item) {
+
+
+        const button = document.createElement("div");
+
+        button.className = "item";
+
+
+        button.innerHTML = `
+
+            <div class="item-icon">
+                ${item.icon}
+            </div>
+
+            <div class="item-name">
+                ${item.name}
+            </div>
+
+        `;
+
+
+        button.onclick = function() {
+
+            equipItem(category, item);
+
+        };
+
+
+        container.appendChild(button);
+
+    });
+
+}
+
+
+
+/* --------------------------------
+   EQUIP ITEM
+-------------------------------- */
+
+
+function equipItem(category, item) {
+
+    const layerName = category === "tops"
+        ? "top-layer"
+        : category === "bottoms"
+        ? "bottom-layer"
+        : category === "hair"
+        ? "hair-layer"
+        : "accessory-layer";
+
+
+    const layer = document.getElementById(layerName);
+
+
+    /*
+       If an image exists,
+       display it.
+    */
+
+    if (item.image !== "") {
+
+        layer.src = item.image;
+
+        layer.style.display = "block";
+
+    }
+
+}
+
+
+
+/* --------------------------------
+   REMOVE ITEM
+-------------------------------- */
+
+
+function removeCurrentItem() {
+
+    const layerName = currentCategory === "tops"
+        ? "top-layer"
+        : currentCategory === "bottoms"
+        ? "bottom-layer"
+        : currentCategory === "hair"
+        ? "hair-layer"
+        : "accessory-layer";
+
+
+    document.getElementById(layerName).style.display = "none";
+
+}
+
+
+
+/* --------------------------------
+   START WITH TOPS
+-------------------------------- */
+
+
+displayItems("tops");
+
+
+</script>
 
 
 </body>
