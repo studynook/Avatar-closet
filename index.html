@@ -14,11 +14,9 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f7f3ef;
+            background: #faf4ed;
             color: #333;
         }
-
-        /* HEADER */
 
         header {
             text-align: center;
@@ -31,12 +29,13 @@
         }
 
         header p {
-            margin-top: 8px;
             color: #777;
         }
 
 
-        /* MAIN LAYOUT */
+        /* =========================
+           MAIN LAYOUT
+        ========================= */
 
         .closet {
             display: flex;
@@ -47,7 +46,9 @@
         }
 
 
-        /* AVATAR */
+        /* =========================
+           AVATAR
+        ========================= */
 
         .avatar-area {
             width: 450px;
@@ -61,9 +62,10 @@
         }
 
         .avatar-base {
-            position: relative;
             width: 100%;
             display: block;
+            position: relative;
+            z-index: 1;
         }
 
         .avatar-layer {
@@ -76,8 +78,26 @@
             pointer-events: none;
         }
 
+        #bottom-layer {
+            z-index: 2;
+        }
 
-        /* CLOSET PANEL */
+        #top-layer {
+            z-index: 3;
+        }
+
+        #hair-layer {
+            z-index: 4;
+        }
+
+        #accessory-layer {
+            z-index: 5;
+        }
+
+
+        /* =========================
+           CLOSET PANEL
+        ========================= */
 
         .closet-panel {
             width: 360px;
@@ -88,7 +108,9 @@
         }
 
 
-        /* CATEGORY BUTTONS */
+        /* =========================
+           CATEGORY BUTTONS
+        ========================= */
 
         .categories {
             display: grid;
@@ -106,17 +128,15 @@
             font-size: 15px;
         }
 
-        .category-button:hover {
-            background: #dddddd;
-        }
-
         .category-button.active {
             background: #333;
             color: white;
         }
 
 
-        /* CLOTHING GRID */
+        /* =========================
+           ITEMS
+        ========================= */
 
         .items {
             display: grid;
@@ -137,6 +157,10 @@
             border-color: #aaa;
         }
 
+        .item.selected {
+            border-color: #333;
+        }
+
         .item-icon {
             font-size: 30px;
             margin-bottom: 5px;
@@ -147,7 +171,9 @@
         }
 
 
-        /* REMOVE BUTTON */
+        /* =========================
+           REMOVE BUTTON
+        ========================= */
 
         .remove-button {
             width: 100%;
@@ -159,8 +185,65 @@
             cursor: pointer;
         }
 
-        .remove-button:hover {
-            background: #dddddd;
+
+        /* =========================
+           TEST CLOTHING
+        ========================= */
+
+        .test-clothing {
+            position: absolute;
+            display: none;
+        }
+
+
+        /* TOPS */
+
+        .pink-top {
+            top: 38%;
+            left: 27%;
+            width: 46%;
+            height: 24%;
+            background: pink;
+            border-radius: 18px 18px 12px 12px;
+        }
+
+        .blue-top {
+            top: 37%;
+            left: 26%;
+            width: 48%;
+            height: 25%;
+            background: lightblue;
+            border-radius: 15px 15px 10px 10px;
+        }
+
+        .purple-top {
+            top: 36%;
+            left: 25%;
+            width: 50%;
+            height: 27%;
+            background: plum;
+            border-radius: 20px;
+        }
+
+
+        /* BOTTOMS */
+
+        .jeans {
+            top: 57%;
+            left: 29%;
+            width: 42%;
+            height: 28%;
+            background: #7899c4;
+            border-radius: 8px;
+        }
+
+        .skirt {
+            top: 57%;
+            left: 25%;
+            width: 50%;
+            height: 23%;
+            background: #d6a6b8;
+            border-radius: 5px 5px 25px 25px;
         }
 
 
@@ -200,7 +283,7 @@
 
     <h1>My Avatar Closet 👗</h1>
 
-    <p>Choose your outfit</p>
+    <p>Mix and match your clothes!</p>
 
 </header>
 
@@ -209,13 +292,16 @@
 <div class="closet">
 
 
-    <!-- AVATAR -->
+    <!-- =========================
+         AVATAR
+    ========================== -->
 
     <div class="avatar-area">
 
         <div class="avatar-container">
 
-            <!-- BASE AVATAR -->
+
+            <!-- BASE -->
 
             <img
                 class="avatar-base"
@@ -224,31 +310,36 @@
             >
 
 
-            <!-- CLOTHING LAYERS -->
+            <!-- TOP LAYER -->
 
-            <img
-                id="bottom-layer"
-                class="avatar-layer"
-                style="display:none;"
-            >
+            <div
+                id="pink-top"
+                class="test-clothing pink-top">
+            </div>
 
-            <img
-                id="top-layer"
-                class="avatar-layer"
-                style="display:none;"
-            >
+            <div
+                id="blue-top"
+                class="test-clothing blue-top">
+            </div>
 
-            <img
-                id="hair-layer"
-                class="avatar-layer"
-                style="display:none;"
-            >
+            <div
+                id="purple-top"
+                class="test-clothing purple-top">
+            </div>
 
-            <img
-                id="accessory-layer"
-                class="avatar-layer"
-                style="display:none;"
-            >
+
+            <!-- BOTTOM LAYER -->
+
+            <div
+                id="jeans"
+                class="test-clothing jeans">
+            </div>
+
+            <div
+                id="skirt"
+                class="test-clothing skirt">
+            </div>
+
 
         </div>
 
@@ -256,50 +347,40 @@
 
 
 
-    <!-- CLOSET -->
+    <!-- =========================
+         CLOSET
+    ========================== -->
 
     <div class="closet-panel">
 
 
-        <!-- CATEGORIES -->
-
         <div class="categories">
+
 
             <button
                 class="category-button active"
                 onclick="showCategory('tops', this)">
+
                 Tops
+
             </button>
+
 
             <button
                 class="category-button"
                 onclick="showCategory('bottoms', this)">
+
                 Bottoms
+
             </button>
 
-            <button
-                class="category-button"
-                onclick="showCategory('hair', this)">
-                Hair
-            </button>
-
-            <button
-                class="category-button"
-                onclick="showCategory('accessories', this)">
-                Extras
-            </button>
 
         </div>
 
 
 
-        <!-- ITEMS -->
-
         <div id="items" class="items"></div>
 
-
-
-        <!-- REMOVE -->
 
         <button
             class="remove-button"
@@ -319,31 +400,32 @@
 <script>
 
 
-/* --------------------------------
+/* =========================
    CLOTHING DATA
--------------------------------- */
+========================= */
 
 
 const clothing = {
+
 
     tops: [
 
         {
             name: "Pink Top",
             icon: "👕",
-            image: ""
+            id: "pink-top"
         },
 
         {
             name: "Blue Top",
             icon: "👚",
-            image: ""
+            id: "blue-top"
         },
 
         {
             name: "Purple Top",
             icon: "🧥",
-            image: ""
+            id: "purple-top"
         }
 
     ],
@@ -354,47 +436,13 @@ const clothing = {
         {
             name: "Jeans",
             icon: "👖",
-            image: ""
+            id: "jeans"
         },
 
         {
             name: "Skirt",
             icon: "👗",
-            image: ""
-        }
-
-    ],
-
-
-    hair: [
-
-        {
-            name: "Hair Style 1",
-            icon: "💇",
-            image: ""
-        },
-
-        {
-            name: "Hair Style 2",
-            icon: "💇",
-            image: ""
-        }
-
-    ],
-
-
-    accessories: [
-
-        {
-            name: "Bag",
-            icon: "👜",
-            image: ""
-        },
-
-        {
-            name: "Hat",
-            icon: "🎩",
-            image: ""
+            id: "skirt"
         }
 
     ]
@@ -403,20 +451,22 @@ const clothing = {
 
 
 
-/* --------------------------------
-   SHOW CATEGORY
--------------------------------- */
-
+/* =========================
+   CURRENT CATEGORY
+========================= */
 
 let currentCategory = "tops";
 
+
+
+/* =========================
+   SHOW CATEGORY
+========================= */
 
 function showCategory(category, button) {
 
     currentCategory = category;
 
-
-    /* Remove active state */
 
     document
         .querySelectorAll(".category-button")
@@ -427,8 +477,6 @@ function showCategory(category, button) {
         });
 
 
-    /* Add active state */
-
     button.classList.add("active");
 
 
@@ -438,14 +486,15 @@ function showCategory(category, button) {
 
 
 
-/* --------------------------------
+/* =========================
    DISPLAY ITEMS
--------------------------------- */
-
+========================= */
 
 function displayItems(category) {
 
-    const container = document.getElementById("items");
+    const container =
+        document.getElementById("items");
+
 
     container.innerHTML = "";
 
@@ -453,7 +502,9 @@ function displayItems(category) {
     clothing[category].forEach(function(item) {
 
 
-        const button = document.createElement("div");
+        const button =
+            document.createElement("div");
+
 
         button.className = "item";
 
@@ -486,68 +537,62 @@ function displayItems(category) {
 
 
 
-/* --------------------------------
+/* =========================
    EQUIP ITEM
--------------------------------- */
-
+========================= */
 
 function equipItem(category, item) {
 
-    const layerName = category === "tops"
-        ? "top-layer"
-        : category === "bottoms"
-        ? "bottom-layer"
-        : category === "hair"
-        ? "hair-layer"
-        : "accessory-layer";
 
+    /*
+       First remove the currently
+       equipped item from THIS category.
+    */
 
-    const layer = document.getElementById(layerName);
+    clothing[category].forEach(function(clothingItem) {
+
+        document
+            .getElementById(clothingItem.id)
+            .style.display = "none";
+
+    });
 
 
     /*
-       If an image exists,
-       display it.
+       Then show the selected item.
     */
 
-    if (item.image !== "") {
+    document
+        .getElementById(item.id)
+        .style.display = "block";
 
-        layer.src = item.image;
-
-        layer.style.display = "block";
-
-    }
 
 }
 
 
 
-/* --------------------------------
-   REMOVE ITEM
--------------------------------- */
-
+/* =========================
+   REMOVE CURRENT ITEM
+========================= */
 
 function removeCurrentItem() {
 
-    const layerName = currentCategory === "tops"
-        ? "top-layer"
-        : currentCategory === "bottoms"
-        ? "bottom-layer"
-        : currentCategory === "hair"
-        ? "hair-layer"
-        : "accessory-layer";
 
+    clothing[currentCategory].forEach(function(item) {
 
-    document.getElementById(layerName).style.display = "none";
+        document
+            .getElementById(item.id)
+            .style.display = "none";
+
+    });
 
 }
 
 
 
-/* --------------------------------
+/* =========================
    START WITH TOPS
--------------------------------- */
-
+========================= */
 
 displayItems("tops");
 
